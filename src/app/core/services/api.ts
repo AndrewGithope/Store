@@ -10,9 +10,16 @@ export class Api {
     apiHTTP = inject(HttpClient);
 
     apiUrl = 'https://dummyjson.com/products';
+    
 
     getProducts(): Observable<ProductResponse>{
        return this.apiHTTP.get<ProductResponse>(this.apiUrl);
     }
+
+    getProductById(id: string | null): Observable<Product>{
+       return this.apiHTTP.get<Product>(`https://dummyjson.com/products/${id}`);
+    }
+
+
 
 }

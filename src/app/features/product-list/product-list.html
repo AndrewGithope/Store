@@ -6,7 +6,7 @@
 
     <div class="product-card">
 
-    <h2 style="text-align: center;">{{product.title}}</h2>
+    <h2 routerLink="['/products', product.id]" style="text-align: center;">{{product.title}}</h2>
 
     <img [src]="product.thumbnail" height="220px" style="display: block; margin-left: auto; margin-right: auto;" alt="{{product.title}}">
 
@@ -18,7 +18,7 @@
 
     <br>
 
-    <button style="display: block; margin-left: auto; margin-right: auto; padding: 10px 8px; border-radius: 5px;">Add to Cart</button>
+    <button class="buy-btn">Add to Cart</button>
 
 
     </div>

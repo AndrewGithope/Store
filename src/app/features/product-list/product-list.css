@@ -14,3 +14,18 @@
 }
 
 
+.buy-btn {
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 12px; 
+    border: 0px;
+    border-radius: 5px;
+    background-color: rgba(126, 129, 132, 0.497);
+    transition: all 0.3s ease;
+}
+
+.buy-btn:hover {
+    background: rgba(88, 97, 105, 0.497);
+    cursor: pointer;
+}

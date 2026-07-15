@@ -3,10 +3,11 @@ import { Api } from '../../core/services/api';
 import { Product, ProductResponse } from '../../shared/models/product';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
