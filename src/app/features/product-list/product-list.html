@@ -1,0 +1,29 @@
+
+
+<div class="products-box">
+
+@for(product of products; track product.id){
+
+    <div class="product-card">
+
+    <h2 style="text-align: center;">{{product.title}}</h2>
+
+    <img [src]="product.thumbnail" height="220px" style="display: block; margin-left: auto; margin-right: auto;" alt="{{product.title}}">
+
+    <h3 style="text-align: center;">{{product.category}}</h3>
+
+    <p>{{product.description}}</p>
+
+    <span style="text-align: center; display: block;">{{product.price}}</span>
+
+    <br>
+
+    <button style="display: block; margin-left: auto; margin-right: auto; padding: 10px 8px; border-radius: 5px;">Add to Cart</button>
+
+
+    </div>
+}
+
+</div>
+
+
