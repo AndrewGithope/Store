@@ -4,6 +4,7 @@ import { Product, ProductResponse } from '../../shared/models/product';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { CartService } from '../../core/services/cart-service';
 
 @Component({
   selector: 'app-product-list',
@@ -13,6 +14,14 @@ import { RouterLink } from '@angular/router';
 })
 export class ProductList implements OnInit{
   service = inject(Api);
+
+  private cartService = inject(CartService);
+
+  onAddToCart(product: any, event: Event): void{
+    event.stopPropagation();
+    this.cartService.addToCart(product);
+    console.log('Items in cart:', this.cartService.cartItems());
+  }
 
   products: Product[] = [];
 

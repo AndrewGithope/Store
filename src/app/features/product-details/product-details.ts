@@ -1,11 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Api } from '../../core/services/api';
 import { Product } from '../../shared/models/product';
 
 @Component({
   selector: 'app-product-details',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css',
 })

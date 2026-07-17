@@ -1,0 +1,11 @@
+.product-details-container {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.product-details-container img {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}

@@ -17,7 +17,7 @@ export class Api {
     }
 
     getProductById(id: string | null): Observable<Product>{
-       return this.apiHTTP.get<Product>(`https://dummyjson.com/products/${id}`);
+       return this.apiHTTP.get<Product>(`${this.apiUrl}/${id}`);
     }
 
 

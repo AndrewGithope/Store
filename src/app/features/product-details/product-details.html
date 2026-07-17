@@ -1,1 +1,12 @@
-<p>product-details works!</p>
+@if(product){
+    <div class="product-details-container">
+        <img [src]="product.thumbnail" [alt]="product.title">
+        <h1>{{product.title}}</h1>
+        <p class="category">Category: {{product.category}}</p>
+        <p class="description">{{product.description}}</p>
+        <p class="price">Price: ${{product.price}}</p>
+        <button [routerLink]="'/'">Back to Store</button>
+    </div>
+}@else {
+    <p>Loading product details...</p>
+}
