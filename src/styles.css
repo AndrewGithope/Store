@@ -6,11 +6,35 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
     font-size: 16px;
     font-weight: normal;
     font-family: 'Elms Sans', sans-serif;
 }
+
+app-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1 0 auto;
+}
+
+app-footer {
+    flex-shrink: 0;
+}
+
+
+
+
+
+
+
 
 
 

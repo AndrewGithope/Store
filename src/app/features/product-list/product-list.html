@@ -1,12 +1,26 @@
+<div class="store-controls">
+    <div class="search-box">
+        <input [(ngModel)] = "searchQuery" (input)="applyFilters()" type="text" placeholder="Search products..." class="search-input">
+    </div>
+</div>
+
+<div class="categories-bar">
+    @for(cat of categories; track cat){
+        <button (click)="selectCategory(cat)" [class.active] = "selectedCategory === cat" class="category-btn">
+            {{cat | titlecase}}
+        </button>
+    }
+</div>
+
 
 
 <div class="products-box">
 
-@for(product of products; track product.id){
+@for(product of filteredProducts; track product.id){
 
     <div class="product-card">
 
-    <h2 [routerLink]="['/products', product.id]" style="text-align: center;">{{product.title}}</h2>
+    <h2 [routerLink]="['/products', product.id]" style="text-align: center; cursor: pointer;">{{product.title}}</h2>
 
     <img [src]="product.thumbnail" height="220px" style="display: block; margin-left: auto; margin-right: auto;" alt="{{product.title}}">
 
