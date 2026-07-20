@@ -1,0 +1,42 @@
+<div class="ai-assistant-container">
+    @if(isOpen()){
+        <div class="chat-window">
+            <div class="chat-header">
+                <h3>Ai Assistant</h3>
+                <button class="close-btn" (click)="toggleChat()">x</button>
+            </div>
+        
+
+        <div class="chat-messages">
+            @for (msg of messages(); track $index) {
+                <div class="message-row" [ngClass]="msg.sender">
+                    <div class="message-bubble">
+                        {{msg.text}}
+                    </div>
+                </div>
+            }
+
+            @if(isLoading()){
+                <div class="message-row ai">
+                    <div class="message-bubble loading-bubble">
+                        <span>.</span><span>.</span><span>.</span>
+                    </div>
+                </div>
+            }
+        </div>
+
+        </div>
+
+        <div class="chat-footer">
+            <input [(ngModel)] = "userInput" (keyup.enter)="onSendMessage()" type="text" placeholder="Ask something ..." class="chat-input">
+            <button class="send-btn" (click)="onSendMessage()">Send Message</button>
+        </div>
+    }
+
+
+    <button class="fab-button" (click)="toggleChat()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-robot" viewBox="0 0 16 16">
+      <path d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5M3 8.062C3 6.76 4.235 5.765 5.53 5.886a26.6 26.6 0 0 0 4.94 0C11.765 5.765 13 6.76 13 8.062v1.157a.93.93 0 0 1-.765.916c-.547.095-1.12.15-1.708.163v.749a1 1 0 0 1-.184.57l-1.62 2.31a.5.5 0 0 1-.818 0l-1.62-2.31a1 1 0 0 1-.184-.57v-.749c-.588-.013-1.161-.068-1.708-.163A.93.93 0 0 1 3 9.219zm2.53-2.176A25.6 25.6 0 0 1 8 5.766c1.11 0 2.193.03 3.19.094.887.057 1.543.834 1.543 1.733v1.157c0 .28-.18.527-.45.575-.504.09-1.057.146-1.64.162a.5.5 0 0 1-.443-.495V7.5a.5.5 0 0 0-1 0v1.39a.5.5 0 0 1-.428.493a24 24 0 0 1-4.318 0 .5.5 0 0 1-.428-.493V7.5a.5.5 0 0 0-1 0v1.39a.5.5 0 0 1-.443.495c-.583-.016-1.136-.072-1.64-.162a.54.54 0 0 1-.45-.575V7.62c0-.9.656-1.676 1.543-1.734M2.5 7a.5.5 0 0 1 .5-.5h.5a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m10 0a.5.5 0 0 1 .5-.5h.5a.5.5 0 0 1 0 1h-.5a.5.5 0 0 1-.5-.5M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m1.5 2.5a.5.5 0 0 0-1 0V4h1z"/>
+        </svg>
+    </button>
+</div>
