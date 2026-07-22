@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core'; // Было '@angular/module'
+import { Component, inject, signal } from '@angular/core'; 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AiService } from '../../../core/services/ai-service';

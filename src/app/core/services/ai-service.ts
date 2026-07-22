@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Product } from '../../shared/models/product';
+import { environment } from '../../../environments/environment.development';
 
 export interface ChatMessage {
     sender: 'user' | 'ai',
@@ -12,7 +13,7 @@ export interface ChatMessage {
     providedIn: 'root'
 })
 export class AiService {
-    private apiKey = 'AQ.Ab8RN6Kep6m1YJJ_WTJ0XCpuSCk_RMoPtqz31iYmIYexArrQCw';
+    private apiKey = environment.geminiApiKey;
 
     private ai = new GoogleGenerativeAI(this.apiKey);
 
