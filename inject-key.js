@@ -5,16 +5,21 @@ const envPath = path.join(__dirname, 'src', 'environments', 'environment.ts');
 const apiKey = process.env.GEMINI_API_KEY;
 
 if (!apiKey) {
-  console.error('ERROR: GEMINI_API_KEY is not defined!');
+  console.error('ERROR: GEMINI_API_KEY is missing!');
   process.exit(1);
 }
 
+// Перезаписываем файл целиком, а не через replace
+const fileContent = `export const environment = {
+  production: true,
+  geminiApiKey: '${apiKey.trim()}'
+};
+`;
+
 try {
-  let content = fs.readFileSync(envPath, 'utf8');
-  content = content.replace(/geminiApiKey:\s*['"].*?['"]/, `geminiApiKey: '${apiKey}'`);
-  fs.writeFileSync(envPath, content);
-  console.log('SUCCESS: API key injected!');
+  fs.writeFileSync(envPath, fileContent, 'utf8');
+  console.log('SUCCESS: API key injected securely!');
 } catch (err) {
-  console.error('ERROR reading or writing environment file:', err);
+  console.error('ERROR writing environment file:', err);
   process.exit(1);
 }
