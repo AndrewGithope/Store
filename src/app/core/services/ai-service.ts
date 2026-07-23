@@ -14,10 +14,10 @@ export interface ChatMessage {
 })
 export class AiService {
 
-    private ai = new GoogleGenerativeAI(environment.geminiApiKey);
+    private ai = new GoogleGenerativeAI('AQ.Ab8RN6JxHyZ9jkhlyqJTZwzvnl7-VO2CkNP1NniCxnbaGnCKHw');
 
     private model = this.ai.getGenerativeModel({
-        model: 'gemini-1.5-flash',
+        model: 'gemini-3.5-flash-lite',
         systemInstruction: 'You are an intelligent shopping assistant for the "Shop for all" online store. Help customers find products, recommend items, and be polite. Keep answers relatively short and friendly.'
     });
 
@@ -48,7 +48,7 @@ Here is the current assortment of our store:
 ${productListText}`;
 
         this.model = this.ai.getGenerativeModel({
-            model: 'gemini-1.5-flash',
+            model: 'gemini-3.5-flash-lite',
             systemInstruction: systemInstructionText
         })
 
