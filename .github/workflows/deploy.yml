@@ -22,7 +22,15 @@ jobs:
 
       - name: Inject API Key into Environment
         run: |
-          sed -i "s/geminiApiKey:.*/geminiApiKey: '${{ secrets.GEMINI_API_KEY }}'/g" src/environments/environment.ts
+          node -e "
+            const fs = require('fs');
+            const path = 'src/environments/environment.ts';
+            let content = fs.readFileSync(path, 'utf8');
+            content = content.replace(/geminiApiKey:\s*['\"].*?['\"]/, \`geminiApiKey: '\${process.env.GEMINI_API_KEY}'\`);
+            fs.writeFileSync(path, content);
+          "
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       - name: Build
         run: npx ng build --base-href=/Store/
