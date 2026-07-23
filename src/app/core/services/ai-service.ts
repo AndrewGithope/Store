@@ -18,7 +18,7 @@ export class AiService {
     private ai = new GoogleGenerativeAI(this.apiKey);
 
     private model = this.ai.getGenerativeModel({
-        model: 'gemini-3.1-flash-lite',
+        model: 'gemini-3.5-flash-lite',
         systemInstruction: 'You are an intelligent shopping assistant for the "Shop for all" online store. Help customers find products, recommend items, and be polite. Keep answers relatively short and friendly.'
     });
 
@@ -49,7 +49,7 @@ Here is the current assortment of our store:
 ${productListText}`;
 
         this.model = this.ai.getGenerativeModel({
-            model: 'gemini-3.1-flash-lite',
+            model: 'gemini-3.5-flash-lite',
             systemInstruction: systemInstructionText
         })
 
