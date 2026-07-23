@@ -17,11 +17,8 @@ export class AiService {
     private apiKey = environment.geminiApiKey;
 
     private ai = new GoogleGenerativeAI(this.apiKey);
-
-    private model = this.ai.getGenerativeModel({
-        model: 'gemini-2.0-flash',
-        systemInstruction: 'You are an intelligent shopping assistant for the "Shop for all" online store. Help customers find products, recommend items, and be polite. Keep answers relatively short and friendly.'
-    });
+    
+    model = this.ai.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
     private chatSession = this.model.startChat({
         history: [],
