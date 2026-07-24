@@ -14,9 +14,7 @@ export interface ChatMessage {
 })
 export class AiService {
 
-    private apiKey = environment.geminiApiKey;
-
-    private ai = new GoogleGenerativeAI(this.apiKey);
+    private ai = new GoogleGenerativeAI(environment.geminiApiKey);
     
     model = this.ai.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
