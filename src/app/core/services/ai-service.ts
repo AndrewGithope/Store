@@ -16,7 +16,7 @@ export class AiService {
 
     private ai = new GoogleGenerativeAI(environment.geminiApiKey);
     
-    model = this.ai.getGenerativeModel({ model: 'gemini-2.0-flash' });
+    model = this.ai.getGenerativeModel({ model: 'gemini-2.0-flash-lite' });
 
     private chatSession = this.model.startChat({
         history: [],
@@ -45,7 +45,7 @@ Here is the current assortment of our store:
 ${productListText}`;
 
         this.model = this.ai.getGenerativeModel({
-            model: 'gemini-2.0-flash',
+            model: 'gemini-2.0-flash-lite',
             systemInstruction: systemInstructionText
         })
 
