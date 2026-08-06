@@ -1,11 +1,24 @@
-<div class="header">
+<mat-toolbar color="primary" class="header-toolbar">
+    <span class="logo">Luxe Fragrances</span>
 
-    <h1>Shop for all</h1>
+    <span class="spacer"></span>
 
-    <p>Hello, I am Andrew and this is my first shop for all people who want to buy something interesting</p>
 
-    <div style="cursor: pointer;" [routerLink]="'/cart'">
-        Cart: <span>{{totalCount()}}</span>
-    </div>
+    <button mat-icon-button class="cart-btn" aria-label="Cart">
+        <mat-icon [matBadge]="cartStore.totalCount()" [matBadgeHidden]="cartStore.totalCount() === 0" matBadgeColor="warn">shopping_bag</mat-icon>
+    </button>
 
-</div>
+    <ng-container *ngIf="authStore.isAuthenticated(); else loginBtn">
+        <span class="user-name">{{ authStore.userName()}}</span>
+        <button mat-button (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon> Logout
+        </button>
+    </ng-container>
+
+    <ng-template #loginBtn>
+        <button mat-raised-button color="accent" (click)="openAuthDialog()">
+            <mat-icon>account_circle</mat-icon> Login
+        </button>
+    </ng-template>
+
+</mat-toolbar>

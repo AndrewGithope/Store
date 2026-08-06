@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Api } from '../../core/services/api';
-import { Product, ProductResponse } from '../../shared/models/product';
+import { Product, ProductsResponse } from '../../shared/models/product';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -37,7 +37,7 @@ export class ProductList implements OnInit{
   categories: string[] = ['all', 'beauty', 'fragrances', 'groceries'];
 
   ngOnInit(): void {
-  this.service.getProducts().subscribe((data: any) => {
+  this.service.getFragrances().subscribe((data: any) => {
     this.allProducts = data.products || data;
     this.filteredProducts = this.allProducts;
 
