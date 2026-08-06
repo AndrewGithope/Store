@@ -18,7 +18,7 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Inject API Key into Environment
         run: node inject-key.js
