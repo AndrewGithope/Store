@@ -1,60 +1,66 @@
 <div class="cart-page">
 
-    <div class="cart-header-icon">
+  <div class="cart-header-icon">
+    <img src="/shopping-cart.png" height="120px" alt="cart">
+    <h2>Your Shopping Cart</h2>
+  </div>
 
-        <img src="/shopping-cart.png" height="150px" alt="cart">
-        
-        <h2>Your Shopping cart</h2>
+  @if(cartStore.items().length > 0) {
+    <div class="cart-items-list">
+      @for(item of cartStore.items(); track item.product.id) {
 
+        <mat-card class="cart-item-row">
+          <img [src]="item.product.thumbnail" [alt]="item.product.title" class="cart-item-img">
+
+          <div class="cart-item-details">
+            <h3>{{ item.product.title }}</h3>
+            <p>${{ item.product.price }} × {{ item.quantity }}</p>
+          </div>
+
+          <div class="cart-quantity-controls">
+            <button mat-icon-button color="primary" (click)="onDecrease(item)">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <span class="qty-num">{{ item.quantity }}</span>
+            <button mat-icon-button color="primary" (click)="onIncrease(item)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+
+          <div class="cart-item-subtotal">
+            ${{ (item.product.price * item.quantity).toFixed(2) }}
+          </div>
+
+          <button mat-icon-button color="warn" class="remove-btn" (click)="onRemove(item)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card>
+
+      }
     </div>
 
-    @if(cartItems().length > 0) {
-        <div class="cart-items-list">
-            @for(item of cartItems(); track item.product.id){
+    <div class="cart-summary">
+      <div class="summary-details">
+        <p>Total Items: <strong>{{ cartStore.totalCount() }}</strong></p>
+        <p>Total Price: <strong class="total-price-text">${{ cartStore.totalPrice().toFixed(2) }}</strong></p>
+      </div>
 
-                <div class="cart-item-row">
-
-                    <img [src]="item.product.thumbnail" [alt]="item.product.title" class="cart-item-img">
-
-                <div class="cart-item-details">
-                    <h3>{{item.product.title}}</h3>
-                    <p>{{item.product.price}} * {{item.quantity}}</p>
-                </div>
-
-                <div class="cart-quantity-controls">
-                    <button class="qty-btn" (click)="onDecrease(item)">-</button>
-                    <span class="qty-num">{{item.quantity}}</span>
-                    <button class="qty-btn" (click)="onIncrease(item)">+</button>
-                </div>
-
-                <div class="cart-item-subtotal">
-                    ${{(item.product.price * item.quantity).toFixed(2)}}
-                </div>
-
-                <button class="remove-btn" (click)="onRemove(item)">Remove</button>
-
-                </div>
-            }
-        </div>
-
-        <div class="cart-summary">
-
-            <div class="summary details">
-                <p>Total Items: <strong>{{totalItemsCount()}}</strong></p>
-                <p>Total Price: <strong class="total-price-text">${{totalPrice().toFixed(2)}}</strong></p>
-            </div>
-
-            <div class="cart-actions">
-                <button class="buy-btn" (click)="onCheckout()">Buy now</button>
-                <button class="clear-btn" (click)="onClearCart()">Clear cart</button>
-            </div>
-
-        </div>
-    }@else {
-        <div class="empty-cart-message">
-            <p>Your cart is empty</p>
-            <button class="goback-btn" [routerLink]="'/'">Go Shopping</button>
-        </div>
-    }
+      <div class="cart-actions">
+        <button mat-raised-button color="primary" class="buy-btn" (click)="onCheckout()">
+          <mat-icon>shopping_bag</mat-icon> Buy now
+        </button>
+        <button mat-outlined-button color="warn" class="clear-btn" (click)="onClearCart()">
+          <mat-icon>delete_sweep</mat-icon> Clear cart
+        </button>
+      </div>
+    </div>
+  } @else {
+    <div class="empty-cart-message">
+      <p>Your cart is empty</p>
+      <button mat-raised-button color="accent" class="goback-btn" [routerLink]="'/'">
+        <mat-icon>arrow_back</mat-icon> Go Shopping
+      </button>
+    </div>
+  }
 
 </div>

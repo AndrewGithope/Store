@@ -1,59 +1,68 @@
-import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState, withComputed } from '@ngrx/signals';
 import { computed } from '@angular/core';
-import { CartItem } from '../../shared/models/cart-item';
 import { Product } from '../../shared/models/product';
 
-
-interface CartState {
-    items: CartItem[];
+export interface CartItem {
+  product: Product;
+  quantity: number;
 }
 
+interface CartState {
+  items: CartItem[];
+}
 
-const initialState: CartState = {
-    items: [],
-};
+// Загружаем сохраненную корзину из localStorage
+const initialItems: CartItem[] = JSON.parse(localStorage.getItem('cart_items') || '[]');
 
 export const cartStore = signalStore(
-    withState(initialState),
-    withComputed((store) => ({
-        totalCount: computed(() => 
-        store.items().reduce((acc, item) => acc + item.quantity, 0)
-    ),
-    totalPrice: computed(() =>
-    store.items().reduce((acc, item) => acc + item.product.price * item.quantity, 0)
-    )
-    })),
-    withMethods((store) => ({
-        addToCart(product: Product): void {
-            const curremtItems = store.items();
-            const existingIndex = curremtItems.findIndex(i => i.product.id === product.id);
+  { providedIn: 'root' },
+  withState<CartState>({ items: initialItems }),
+  withComputed((store) => ({
+    totalCount: computed(() => store.items().reduce((acc, item) => acc + item.quantity, 0)),
+    totalPrice: computed(() => store.items().reduce((acc, item) => acc + item.product.price * item.quantity, 0))
+  })),
+  withMethods((store) => ({
+    addToCart(product: Product) {
+      const currentItems = store.items();
+      const existing = currentItems.find((i) => i.product.id === product.id);
+      let updatedItems: CartItem[];
 
-            if(existingIndex > -1){
-                const updated = [...curremtItems];
-                updated[existingIndex] = {
-                    ...updated[existingIndex],
-                    quantity: updated[existingIndex].quantity + 1
-                };
-                patchState(store, {items: updated});
-            }else {
-                patchState(store, {items: [...curremtItems, {product, quantity: 1}] });
-            }
-        },
+      if (existing) {
+        updatedItems = currentItems.map((i) =>
+          i.product.id === product.id ? { ...i, quantity: i.quantity + 1 } : i
+        );
+      } else {
+        updatedItems = [...currentItems, { product, quantity: 1 }];
+      }
 
-        removeFromCart(productId: number): void {
-            patchState(store, {
-                items: store.items().filter(item => item.product.id !== productId)
-            });
-        },
+      localStorage.setItem('cart_items', JSON.stringify(updatedItems));
+      patchState(store, { items: updatedItems });
+    },
+    decreaseQuantity(productId: number) {
+      const currentItems = store.items();
+      const existing = currentItems.find((i) => i.product.id === productId);
+      if (!existing) return;
 
-        clearCart(): void {
-            patchState(store, {items: []});
-        }
-    }))
+      let updatedItems: CartItem[];
+      if (existing.quantity > 1) {
+        updatedItems = currentItems.map((i) =>
+          i.product.id === productId ? { ...i, quantity: i.quantity - 1 } : i
+        );
+      } else {
+        updatedItems = currentItems.filter((i) => i.product.id !== productId);
+      }
+
+      localStorage.setItem('cart_items', JSON.stringify(updatedItems));
+      patchState(store, { items: updatedItems });
+    },
+    removeFromCart(productId: number) {
+      const updatedItems = store.items().filter((i) => i.product.id !== productId);
+      localStorage.setItem('cart_items', JSON.stringify(updatedItems));
+      patchState(store, { items: updatedItems });
+    },
+    clearCart() {
+      localStorage.removeItem('cart_items');
+      patchState(store, { items: [] });
+    }
+  }))
 );
-
-
-
-
-
-

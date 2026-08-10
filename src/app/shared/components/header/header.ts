@@ -8,6 +8,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AuthStore } from '../../../core/store/auth.store';
 import { cartStore } from '../../../core/store/cart.store';
 import { AuthDialogComponent } from '../auth-dialog/auth-dialog.component';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -19,8 +20,9 @@ import { AuthDialogComponent } from '../auth-dialog/auth-dialog.component';
     MatIconModule,
     MatBadgeModule,
     MatDialogModule,
-    AuthDialogComponent
-  ],
+    AuthDialogComponent,
+    RouterLink
+],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })
@@ -29,6 +31,8 @@ export class Header {
   readonly authStore = inject(AuthStore);
   readonly cartStore = inject(cartStore);
   private dialog = inject(MatDialog);
+  private router = inject(Router);
+
 
 
   openAuthDialog(): void {
@@ -40,6 +44,17 @@ export class Header {
 
   logout(): void{
     this.authStore.logout();
+  }
+
+  opencart(): void {
+    this.router.navigate(['/cart']);
+  }
+
+  scrollTo(elementId: string): void {
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
   }
 }
 

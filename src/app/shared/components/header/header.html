@@ -1,24 +1,39 @@
-<mat-toolbar color="primary" class="header-toolbar">
-    <span class="logo">Luxe Fragrances</span>
+<mat-toolbar class="main-header">
+  <nav class="nav-links">
+    <a routerLink="/" class="nav-item">Home</a>
+    <a (click)="scrollTo('mission')" class="nav-item">About Us</a>
+    <a (click)="scrollTo('catalog')" class="nav-item">Fragrances</a>
+    <a (click)="scrollTo('footer')" class="nav-item">Contact Us</a>
+  </nav>
 
-    <span class="spacer"></span>
+  <div class="logo-container" routerLink="/">
+    <span class="brand-logo">LUXE FRAGRANCES</span>
+  </div>
 
-
-    <button mat-icon-button class="cart-btn" aria-label="Cart">
-        <mat-icon [matBadge]="cartStore.totalCount()" [matBadgeHidden]="cartStore.totalCount() === 0" matBadgeColor="warn">shopping_bag</mat-icon>
-    </button>
-
+  <div class="header-actions">
     <ng-container *ngIf="authStore.isAuthenticated(); else loginBtn">
-        <span class="user-name">{{ authStore.userName()}}</span>
-        <button mat-button (click)="logout()">
-          <mat-icon>exit_to_app</mat-icon> Logout
-        </button>
+      <span class="user-name">
+        <mat-icon>person</mat-icon>
+        {{ authStore.user()?.firstName || authStore.user()?.username }}
+      </span>
+      <button mat-icon-button color="warn" (click)="authStore.logout()" title="Logout">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
     </ng-container>
 
     <ng-template #loginBtn>
-        <button mat-raised-button color="accent" (click)="openAuthDialog()">
-            <mat-icon>account_circle</mat-icon> Login
-        </button>
+      <button mat-icon-button (click)="openAuthDialog()" title="Login">
+        <mat-icon>person_outline</mat-icon>
+      </button>
     </ng-template>
 
+    <button mat-icon-button (click)="opencart()" class="cart-btn" title="Shopping Cart">
+      <mat-icon 
+        [matBadge]="cartStore.totalCount()" 
+        [matBadgeHidden]="cartStore.totalCount() === 0" 
+        matBadgeColor="warn">
+        shopping_bag
+      </mat-icon>
+    </button>
+  </div>
 </mat-toolbar>

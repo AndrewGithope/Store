@@ -1,133 +1,119 @@
 .cart-page {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    border-radius: 13px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-    background-color: rgb(100, 138, 115);
-}
-
-.cart-header-icon{
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
+  max-width: 850px;
+  margin: 40px auto;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  background-color: #f4f6f5;
 }
 
 .cart-header-icon {
-    margin-left: auto;
-    margin-right: auto;
+  text-align: center;
+  margin-bottom: 24px;
 }
 
+.cart-header-icon h2 {
+  margin-top: 12px;
+  font-family: 'Playfair Display', serif, sans-serif;
+  color: #2c3e50;
+  font-size: 1.8rem;
+}
 
 .cart-items-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(auto-fill());
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .cart-item-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 15px;
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-radius: 12px !important;
+  background-color: #ffffff !important;
 }
 
-.cart-item-row img {
-    width: 200px;
-    object-fit: contain;
-    border-radius: 8px;
-    border: 1px solid #f0f0f0;
+.cart-item-img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.cart-item-details {
+  flex: 1;
+  margin-left: 16px;
+}
+
+.cart-item-details h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.cart-item-details p {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
 }
 
 .cart-quantity-controls {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 16px;
 }
 
-.qty-btn {
-    width: 30px;
-    border: 1px solid #ccc;
-    background-color: white;
-    border-radius: 25%;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 18px;
-    transition: all 0.3s ease;
+.qty-num {
+  font-weight: bold;
+  font-size: 1.1rem;
+  min-width: 24px;
+  text-align: center;
 }
 
-.qty-btn:hover {
-    background-color: rgb(218, 220, 188);
-}
-
-.remove-btn {
-    background-color: #e08734;
-    border: none;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.remove-btn:hover {
-    background-color: #ea7c15;
+.cart-item-subtotal {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2e7d32;
+  margin-right: 16px;
+  min-width: 80px;
+  text-align: right;
 }
 
 .cart-summary {
-    border-top: 2px solid rgb(24, 24, 24);
+  border-top: 2px solid #e0e0e0;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-details p {
+  margin: 4px 0;
+  font-size: 1.1rem;
+}
+
+.total-price-text {
+  color: #2e7d32;
+  font-size: 1.3rem;
 }
 
 .cart-actions {
-    display: flex;
-    gap: 15px;
+  display: flex;
+  gap: 12px;
 }
 
-.clear-btn {
-    background-color: #8ba9ab;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
+.empty-cart-message {
+  text-align: center;
+  padding: 40px 0;
 }
 
-.clear-btn:hover {
-    background-color: #7fa8ab;
+.empty-cart-message p {
+  font-size: 1.3rem;
+  color: #666;
+  margin-bottom: 16px;
 }
-
-.buy-btn {
-    background-color: #4dc780;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-.buy-btn:hover {
-    background-color: #2acf6f;
-}
-
-.goback-btn {
-    background-color: rgb(161, 91, 226);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 15px;
-    transition: all 0.3s ease;
-}
-
-.goback-btn:hover {
-    background-color: rgb(144, 59, 223);
-}
-
-

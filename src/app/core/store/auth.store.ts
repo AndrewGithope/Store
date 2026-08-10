@@ -1,67 +1,89 @@
+import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { inject } from '@angular/core';
-import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
-import { computed } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { LoginRequest, UserProfile } from '../../shared/models/auth.interface';
-import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { pipe, switchMap, tap, catchError, EMPTY } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { tap, catchError, of } from 'rxjs';
 
-
-
+export interface User {
+  id: number;
+  username: string;
+  firstName: string;
+  lastName?: string;
+  email?: string;
+  token?: string;
+}
 
 interface AuthState {
-    user: UserProfile | null;
-    token: string | null;
-    isLoading: boolean;
-    error: string | null;
+  user: User | null;
+  token: string | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
 }
-
 
 const initialState: AuthState = {
-    user: null,
-    token: localStorage.getItem('freagrance_auth_token'),
-    isLoading: false,
-    error: null
-}
+  user: JSON.parse(localStorage.getItem('user') || 'null'),
+  token: localStorage.getItem('token') || null,
+  isAuthenticated: !!localStorage.getItem('token'),
+  isLoading: false,
+  error: null,
+};
 
 export const AuthStore = signalStore(
-    withState(initialState),
-    withComputed((store) => ({
-        isAuthenticated: computed(() => !!store.token()),
-        userName: computed(() => store.user() ? `${store.user()?.firstName} ${store.user()?.lastName}` : `Gost`)
-    })),
-    withMethods((store, authService = inject(AuthService)) => ({
-        login: rxMethod<LoginRequest>(
-            pipe(
-                tap(() => patchState(store, {isLoading: true, error: null})),
-                switchMap((credentials) => 
-                    authService.login(credentials).pipe(
-                        tap((response) => {
-                            patchState(store, {
-                                user: response,
-                                token: response.accessToken,
-                                isLoading: false,
-                                error: null
-                            });
-                        }),
-                        catchError((err) => {
-                            patchState(store, {
-                                isLoading: false,
-                                error: err.error?.message || 'Login erro'
-                            });
-                            return EMPTY;
-                        })
-                    )
-                )
-            )
-        ),
-        logout():void {
-            authService.logout();
-            patchState(store, {user: null, token: null, error: null})
-        }
-    }))
-)
+  { providedIn: 'root' },
+  withState(initialState),
+  withMethods((store, http = inject(HttpClient)) => ({
+    login(credentials: { username: string; password?: string }) {
+      patchState(store, { isLoading: true, error: null });
 
+      // Подменяем данные для DummyJSON: отправляем валидные emilys / emilyspass
+      const dummyPayload = {
+        username: 'emilys',
+        password: 'emilyspass'
+      };
 
+      http.post<any>('https://dummyjson.com/auth/login', dummyPayload).pipe(
+        tap((response) => {
+          // Создаем объект пользователя с ИМЕНЕМ, которое ввел юзер (Андрей, Джонни и т.д.)
+          const user: User = {
+            id: response.id,
+            username: credentials.username, // Имя из формы ввода!
+            firstName: credentials.username, // Для отображения в шапке
+            lastName: '',
+            email: `${credentials.username.toLowerCase()}@fragrance.com`,
+            token: response.accessToken || response.token // Настоящий JWT от сервера
+          };
 
+          // Сохраняем сессию
+          localStorage.setItem('token', user.token!);
+          localStorage.setItem('user', JSON.stringify(user));
 
+          patchState(store, {
+            user,
+            token: user.token,
+            isAuthenticated: true,
+            isLoading: false,
+            error: null
+          });
+        }),
+        catchError(() => {
+          patchState(store, {
+            isLoading: false,
+            error: 'Authentication failed. Please try again.'
+          });
+          return of(null);
+        })
+      ).subscribe();
+    },
+
+    logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      patchState(store, {
+        user: null,
+        token: null,
+        isAuthenticated: false,
+        error: null
+      });
+    }
+  }))
+);

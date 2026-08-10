@@ -1,41 +1,40 @@
 import { Component, inject } from '@angular/core';
-import { CartService } from '../../core/services/cart-service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CartItem } from '../../shared/models/cart-item';
-
+import { cartStore } from '../../core/store/cart.store';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-cart',
-  imports: [RouterLink],
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatIconModule, MatCardModule, RouterLink],
   templateUrl: './cart.html',
   styleUrl: './cart.css',
 })
 export class Cart {
-  private cartService = inject(CartService);
-
-  cartItems = this.cartService.cartItems;
-  totalPrice = this.cartService.totalItemsPrice;
-  totalItemsCount = this.cartService.totalItemsCount;
+  readonly cartStore = inject(cartStore);
 
   onIncrease(item: CartItem): void {
-    this.cartService.addToCart(item.product);
+    this.cartStore.addToCart(item.product);
   }
 
   onDecrease(item: CartItem): void {
-    this.cartService.decreaseQuantity(item.product.id);
+    this.cartStore.decreaseQuantity(item.product.id);
   }
 
   onRemove(item: CartItem): void {
-    this.cartService.removeFromCart(item.product.id);
+    this.cartStore.removeFromCart(item.product.id);
   }
 
   onClearCart(): void {
-    this.cartService.clearCart();
+    this.cartStore.clearCart();
   }
 
   onCheckout(): void {
-    alert('Thank you for your purchase');
-    this.cartService.clearCart();
+    alert('Thank you for your purchase!');
+    this.cartStore.clearCart();
   }
 }

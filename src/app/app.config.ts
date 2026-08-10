@@ -4,6 +4,8 @@ import { HttpClient, provideHttpClient, withFetch, withInterceptors } from '@ang
 
 import { routes } from './app.routes';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
+import { AuthStore } from './core/store/auth.store';
+import { cartStore } from './core/store/cart.store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,6 +14,8 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withFetch(),
       withInterceptors([authInterceptor])
-    )
+    ),
+    AuthStore,
+    cartStore
   ]
 };

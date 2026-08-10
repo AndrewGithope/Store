@@ -1,103 +1,266 @@
-.products-box {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+/* ОБЩИЙ СТИЛЬ СТРАНИЦЫ */
+.landing-page {
+  width: 100%;
+}
+
+/* HERO BANNER (1 в 1 как на 1-м скриншоте) */
+.hero-section {
+  width: 100%;
+  height: 480px;
+  background: url('https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  position: relative;
+}
+
+.hero-overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  padding: 0 80px;
+}
+
+.hero-text-content {
+  color: #ffffff;
+  max-width: 550px;
+}
+
+.hero-subtitle {
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.hero-text-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.hero-text-content p {
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+  color: #e0e0e0;
+}
+
+.hero-btn {
+  background-color: #0056b3 !important;
+  color: #ffffff !important;
+  padding: 10px 28px !important;
+  font-size: 1rem !important;
+  border-radius: 4px !important;
+  text-transform: uppercase;
+  font-weight: 600 !important;
+}
+
+/* OUR MISSION SECTION */
+.mission-section {
+  text-align: center;
+  padding: 60px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.mission-section h2 {
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.mission-underline {
+  width: 60px;
+  height: 2px;
+  background-color: #111;
+  margin: 0 auto 20px auto;
+}
+
+.mission-section p {
+  color: #666;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* PROMO GRID SECTION */
+.promo-grid-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto 60px auto;
+  padding: 0 20px;
+}
+
+.promo-card {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.promo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.promo-card:hover img {
+  transform: scale(1.05);
+}
+
+.promo-title {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* CATALOG SECTION */
+.catalog-section {
+  max-width: 1200px;
+  margin: 0 auto 60px auto;
+  padding: 0 20px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.section-header p {
+  color: #666;
+  font-size: 1rem;
+}
+
+/* CONTROLS BAR & SEARCH INPUT FIXES */
+.controls-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.category-btn {
+  height: 48px;
+  border-radius: 24px !important;
+  padding: 0 24px !important;
+  font-weight: 600;
+}
+
+/* Фикс ширины поля поиска */
+.search-field {
+  flex: 1;
+  min-width: 320px;
+  max-width: 500px; /* Чтобы инпут расширялся и текст не перекрывался иконкой */
+}
+
+.search-field .mat-mdc-form-field-subscript-wrapper {
+  display: none; /* Убирает лишний отступ снизу */
+}
+
+/* PRODUCTS GRID & CARD FIXES */
+.products-grid {
+  display: grid;
+  /* Компактная сетка: карточки будут шириной 260px-300px */
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
+  gap: 28px;
+  justify-content: center;
 }
 
 .product-card {
-    background-color: rgba(240, 255, 255, 0.534);
-    border-radius: 5%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Центрируем весь контент */
+  text-align: center;   /* Центрируем текст */
+  padding: 20px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-
-.buy-btn {
-    display: block; 
-    margin-left: auto;
-    margin-right: auto;
-    padding: 10px 12px; 
-    border: 0px;
-    border-radius: 5px;
-    background-color: rgba(126, 129, 132, 0.497);
-    transition: all 0.3s ease;
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
-.buy-btn:hover {
-    background: rgba(88, 97, 105, 0.497);
-    cursor: pointer;
+/* Картинка товара */
+.image-wrapper {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
 }
 
-.store-controls {
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
+.image-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
-.search-input {
-    width: 100%;
-    max-width: 500px;
-    padding: 12px 20px;
-    font-size: 18px;
-    border: 2px solid rgb(39, 114, 39);
-    border-radius: 12px;
-    background-color: rgb(41, 157, 41);
-    color: white;
-    outline: none;
-    transition: all 0.3s ease;
+/* Текстовая информация карточки */
+.card-content {
+  padding: 0 !important;
+  margin-bottom: 16px;
+  width: 100%;
 }
 
-.search-input:hover {
-    border-color: rgb(67, 189, 67);
-    box-shadow: 0 0 8px rgb(93, 90, 90);
+.category-tag {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #888888;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 6px;
 }
 
-.search-input::placeholder{
-    color: white;
+.product-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
 }
 
-.categories-bar {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 15px;
+.product-price {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #2c3e50;
+  margin: 0;
 }
 
-
-.category-btn {
-    padding: 8px 18px;
-    border: 1px solid rgb(73, 73, 73);
-    background-color: white;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.3s ease;
+/* Кнопка Add to Cart */
+.card-actions {
+  padding: 0 !important;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.category-btn:hover {
-    background-color: rgb(202, 187, 158);
-    border-color: rgb(111, 111, 111);
+.add-btn {
+  width: 100%;
+  border-radius: 20px !important;
+  height: 40px;
+  font-weight: 600;
 }
-
-
-.category-btn.active{
-    background-color: rgb(164, 164, 129);
-    color: silver;
-    border-color: rgb(123, 86, 86);
-}
-
-
-
-
-
-
-
-
-
-
