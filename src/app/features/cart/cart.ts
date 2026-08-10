@@ -6,6 +6,8 @@ import { cartStore } from '../../core/store/cart.store';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
+import { CheckoutDialogComponent } from '../../shared/components/checkout-dialog/checkout-dialog.component';
 
 @Component({
   selector: 'app-cart',
@@ -16,6 +18,14 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class Cart {
   readonly cartStore = inject(cartStore);
+  private dialog = inject(MatDialog);
+
+  openCheckout(): void {
+    this.dialog.open(CheckoutDialogComponent, {
+      width: '500px',
+      disableClose: true
+    });
+  }
 
   onIncrease(item: CartItem): void {
     this.cartStore.addToCart(item.product);

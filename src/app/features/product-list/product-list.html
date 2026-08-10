@@ -1,14 +1,14 @@
 <div class="landing-page">
 
   <!-- 1. HERO BANNER -->
-  <section class="hero-section">
+  <section class="hero-section" style="background-image: url('https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&w=1920&q=80');">
     <div class="hero-overlay">
       <div class="hero-text-content">
-        <span class="hero-subtitle">NEW COLLECTION</span>
-        <h1>FIND YOUR PERFECT SCENT</h1>
-        <p>An exclusive collection of timeless luxury perfumes curated for your unique presence.</p>
+        <span class="hero-subtitle">ELEGANCE IN EVERY DROP</span>
+        <h1>FIND YOUR SIGNATURE SCENT</h1>
+        <p>Explore an exclusive collection of luxury perfumes crafted for your unique presence and style.</p>
         <button mat-raised-button class="hero-btn" (click)="scrollToCatalog()">
-          Get Our Collection
+          Explore Collection
         </button>
       </div>
     </div>
@@ -19,32 +19,32 @@
     <h2>OUR MISSION</h2>
     <div class="mission-underline"></div>
     <p>
-      At Luxe Fragrances, we believe that scent is the most intense form of memory. 
+      At Luxe Fragrances, we believe that scent is the most intimate form of memory. 
       Our mission is to bring you iconic, high-grade fragrances that define individuality and sophistication.
     </p>
   </section>
 
-  <!-- 3. FEATURED PROMOS -->
+  <!-- 3. FEATURED PROMO CARDS -->
   <section class="promo-grid-section">
     <div class="promo-card">
-      <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=600&q=80" alt="Elegance">
+      <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=600&q=80" alt="Eau De Parfum">
       <div class="promo-title">EAU DE PARFUM</div>
     </div>
     <div class="promo-card">
-      <img src="https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&w=600&q=80" alt="Luxury">
-      <div class="promo-title">LUXURY COLLECTION</div>
+      <img src="https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&w=600&q=80" alt="Niche Collection">
+      <div class="promo-title">NICHE COLLECTION</div>
     </div>
     <div class="promo-card">
-      <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=600&q=80" alt="Essential">
-      <div class="promo-title">SUMMER ESSENTIALS</div>
+      <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=600&q=80" alt="Essential Oils">
+      <div class="promo-title">ESSENTIAL OILS</div>
     </div>
   </section>
 
   <!-- 4. CATALOG & SEARCH -->
   <section #catalogSection id="catalog" class="catalog-section">
     <div class="section-header">
-      <h2>EXPLORE PRODUCTS</h2>
-      <p>Search our top picks for luxury fragrances that define your style.</p>
+      <h2>EXPLORE FRAGRANCES</h2>
+      <p>Discover our top luxury fragrance selections.</p>
     </div>
 
     <div class="controls-bar">
@@ -53,7 +53,7 @@
       </button>
 
       <mat-form-field appearance="outline" class="search-field">
-        <mat-label>Search fragrances (e.g. Dior, Chanel)...</mat-label>
+        <mat-label>Search fragrances (e.g., Dior, Chanel)...</mat-label>
         <input 
           matInput 
           [ngModel]="searchQuery()" 
@@ -63,7 +63,7 @@
       </mat-form-field>
     </div>
 
-    <!-- Сетка карточек -->
+    <!-- Product Grid -->
     <div class="products-grid" *ngIf="filteredProducts().length > 0; else emptyState">
       <mat-card class="product-card" *ngFor="let product of filteredProducts()">
         <div class="image-wrapper">

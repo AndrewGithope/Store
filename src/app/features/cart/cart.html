@@ -46,8 +46,8 @@
       </div>
 
       <div class="cart-actions">
-        <button mat-raised-button color="primary" class="buy-btn" (click)="onCheckout()">
-          <mat-icon>shopping_bag</mat-icon> Buy now
+        <button mat-raised-button color="primary" (click)="openCheckout()" [disabled]="cartStore.items().length === 0">
+          Proceed to Checkout (${{ cartStore.totalPrice().toFixed(2) }})
         </button>
         <button mat-outlined-button color="warn" class="clear-btn" (click)="onClearCart()">
           <mat-icon>delete_sweep</mat-icon> Clear cart
