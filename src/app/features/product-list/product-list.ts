@@ -69,7 +69,6 @@ export class ProductListComponent implements OnInit {
   }
 
   addToCart(product: Product): void {
-    // Если пользователь не авторизован — открываем окно логина
     if (!this.authStore.isAuthenticated()) {
       this.dialog.open(AuthDialogComponent, {
         width: '400px'
@@ -77,7 +76,6 @@ export class ProductListComponent implements OnInit {
       return;
     }
 
-    // Если авторизован — добавляем в корзину
     this.cartStore.addToCart(product);
   }
 }

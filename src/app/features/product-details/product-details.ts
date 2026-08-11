@@ -22,8 +22,7 @@ export class ProductDetails implements OnInit {
   ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('id');
     
-    // Имитируем получение товара (или заменяй на реальный ProductService)
-    // Здесь берем из сохраненного списка или запрашиваем API
+
     fetch(`https://dummyjson.com/products/${productId}`)
       .then(res => res.json())
       .then(data => this.product.set(data))

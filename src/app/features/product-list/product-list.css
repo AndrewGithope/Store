@@ -3,7 +3,6 @@
   width: 100%;
 }
 
-/* HERO BANNER (1 в 1 как на 1-м скриншоте) */
 .hero-section {
   width: 100%;
   height: 480px;
@@ -58,7 +57,6 @@
   font-weight: 600 !important;
 }
 
-/* OUR MISSION SECTION */
 .mission-section {
   text-align: center;
   padding: 60px 20px;
@@ -86,7 +84,6 @@
   line-height: 1.7;
 }
 
-/* PROMO GRID SECTION */
 .promo-grid-section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -126,7 +123,6 @@
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
 }
 
-/* CATALOG SECTION */
 .catalog-section {
   max-width: 1200px;
   margin: 0 auto 60px auto;
@@ -150,7 +146,7 @@
   font-size: 1rem;
 }
 
-/* CONTROLS BAR & SEARCH INPUT FIXES */
+
 .controls-bar {
   display: flex;
   align-items: center;
@@ -166,21 +162,20 @@
   font-weight: 600;
 }
 
-/* Фикс ширины поля поиска */
+
 .search-field {
   flex: 1;
   min-width: 320px;
-  max-width: 500px; /* Чтобы инпут расширялся и текст не перекрывался иконкой */
+  max-width: 500px; 
 }
 
 .search-field .mat-mdc-form-field-subscript-wrapper {
-  display: none; /* Убирает лишний отступ снизу */
+  display: none; 
 }
 
-/* PRODUCTS GRID & CARD FIXES */
+
 .products-grid {
   display: grid;
-  /* Компактная сетка: карточки будут шириной 260px-300px */
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
   gap: 28px;
   justify-content: center;
@@ -189,8 +184,8 @@
 .product-card {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Центрируем весь контент */
-  text-align: center;   /* Центрируем текст */
+  align-items: center; 
+  text-align: center;  
   padding: 20px;
   border-radius: 16px;
   background-color: #ffffff;
@@ -203,7 +198,7 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
-/* Картинка товара */
+
 .image-wrapper {
   width: 100%;
   height: 220px;
@@ -219,7 +214,7 @@
   object-fit: contain;
 }
 
-/* Текстовая информация карточки */
+
 .card-content {
   padding: 0 !important;
   margin-bottom: 16px;
@@ -250,7 +245,6 @@
   margin: 0;
 }
 
-/* Кнопка Add to Cart */
 .card-actions {
   padding: 0 !important;
   width: 100%;

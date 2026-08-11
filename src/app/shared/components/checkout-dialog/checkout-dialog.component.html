@@ -1,6 +1,6 @@
 <div class="checkout-dialog-container">
   
-  <!-- Заголовок -->
+  
   <div class="dialog-header">
     <h2 mat-dialog-title *ngIf="!isSuccess">Checkout</h2>
     <h2 mat-dialog-title *ngIf="isSuccess">Order Placed!</h2>
@@ -11,10 +11,9 @@
 
   <mat-dialog-content class="dialog-body">
 
-    <!-- Форма оформления заказа -->
     <ng-container *ngIf="!isSuccess; else successState">
       
-      <!-- Сводка по сумме заказа -->
+     
       <div class="order-summary-box">
         <span>Total Amount:</span>
         <strong class="total-price">${{ cartStore.totalPrice().toFixed(2) }}</strong>
@@ -76,7 +75,7 @@
 
     </ng-container>
 
-    <!-- Экран успешного заказа -->
+  
     <ng-template #successState>
       <div class="success-box">
         <mat-icon class="success-icon">check_circle</mat-icon>

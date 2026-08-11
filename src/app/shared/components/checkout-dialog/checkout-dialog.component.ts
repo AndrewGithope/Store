@@ -41,13 +41,13 @@ export class CheckoutDialogComponent {
 
   onSubmit(): void {
     if (this.checkoutForm.valid) {
-      // Генерируем случайный номер заказа
+
       this.orderNumber = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
       
-      // Очищаем корзину
+
       this.cartStore.clearCart();
       
-      // Показываем экран успешного заказа
+
       this.isSuccess = true;
     }
   }

@@ -36,7 +36,7 @@ export const AuthStore = signalStore(
     login(credentials: { username: string; password?: string }) {
       patchState(store, { isLoading: true, error: null });
 
-      // Подменяем данные для DummyJSON: отправляем валидные emilys / emilyspass
+      
       const dummyPayload = {
         username: 'emilys',
         password: 'emilyspass'
@@ -44,14 +44,14 @@ export const AuthStore = signalStore(
 
       http.post<any>('https://dummyjson.com/auth/login', dummyPayload).pipe(
         tap((response) => {
-          // Создаем объект пользователя с ИМЕНЕМ, которое ввел юзер (Андрей, Джонни и т.д.)
+        
           const user: User = {
             id: response.id,
-            username: credentials.username, // Имя из формы ввода!
-            firstName: credentials.username, // Для отображения в шапке
+            username: credentials.username, 
+            firstName: credentials.username, 
             lastName: '',
             email: `${credentials.username.toLowerCase()}@fragrance.com`,
-            token: response.accessToken || response.token // Настоящий JWT от сервера
+            token: response.accessToken || response.token 
           };
 
           // Сохраняем сессию

@@ -17,7 +17,7 @@ A modern, responsive e-commerce web application built with **Angular 22** featur
 ## 🛠️ Tech Stack
 
 * **Frontend Framework:** Angular 22 (Standalone Components, Signals)
-* **AI Integration:** Google Generative AI SDK (`@google/generative-ai`) — Gemini 1.5 Flash
+* **AI Integration:** Google Generative AI SDK (`@google/generative-ai`) — Gemini 3.5 Flash-lite
 * **State & Asynchronous Logic:** RxJS & Angular Signals
 * **Forms & Styling:** Angular FormsModule, CSS3 / Flexbox / Grid
 

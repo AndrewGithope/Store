@@ -10,7 +10,7 @@ if (!cleanKey) {
   process.exit(1);
 }
 
-// Кодируем ключ в Base64, чтобы GitHub Push Protection не находил совпадений по маске
+
 const base64Key = Buffer.from(cleanKey).toString('base64');
 
 const content = `export const environment = {

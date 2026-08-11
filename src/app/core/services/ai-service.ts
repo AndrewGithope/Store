@@ -23,7 +23,7 @@ export class AiService {
   isLoading = signal<boolean>(false);
 
   constructor() {
-    // Initialize default model/chat without products initially
+
     this.initModelAndChat([]);
   }
 
