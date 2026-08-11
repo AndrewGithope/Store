@@ -13,6 +13,7 @@ import { cartStore } from '../../core/store/cart.store';
 import { Header } from '../../shared/components/header/header';
 import { AuthStore } from '../../core/store/auth.store';
 import { AuthDialogComponent } from '../../shared/components/auth-dialog/auth-dialog.component';
+import { AiService } from '../../core/services/ai-service';
 
 @Component({
   selector: 'app-product-list',
@@ -35,6 +36,7 @@ export class ProductListComponent implements OnInit {
   readonly cartStore = inject(cartStore);
   readonly authStore = inject(AuthStore);
   private dialog = inject(MatDialog);
+  private aiService = inject(AiService);
 
   products = signal<Product[]>([]);
   searchQuery = signal<string>('');
@@ -51,6 +53,7 @@ export class ProductListComponent implements OnInit {
     this.productService.getFragrances().subscribe((data) => {
       const items: Product[] = Array.isArray(data) ? data : ((data as any)?.products ?? []);
       this.products.set(items);
+      this.aiService.initializeAsisstantWithProducts(items);
     });
   }
 
