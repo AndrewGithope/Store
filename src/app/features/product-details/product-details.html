@@ -1,12 +1,30 @@
-@if(product){
-    <div class="product-details-container">
-        <img [src]="product.thumbnail" [alt]="product.title">
-        <h1>{{product.title}}</h1>
-        <p class="category">Category: {{product.category}}</p>
-        <p class="description">{{product.description}}</p>
-        <p class="price">Price: ${{product.price}}</p>
-        <button [routerLink]="'/'">Back to Store</button>
+<div class="product-details-container" *ngIf="product(); else loading">
+  <button mat-button class="back-btn" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon> Back to Catalog
+  </button>
+
+  <div class="details-grid">
+    <div class="image-section">
+      <img [src]="product().thumbnail" [alt]="product().title">
     </div>
-}@else {
-    <p>Loading product details...</p>
-}
+
+    <div class="info-section">
+      <span class="category-tag">{{ product().category }}</span>
+      <h1>{{ product().title }}</h1>
+      <p class="price">${{ product().price }}</p>
+      <p class="description">{{ product().description }}</p>
+
+      <div class="actions">
+        <button mat-raised-button color="primary" class="add-to-cart-btn" (click)="addToCart()">
+          <mat-icon>add_shopping_cart</mat-icon> Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading-state">
+    <p>Loading fragrance details...</p>
+  </div>
+</ng-template>

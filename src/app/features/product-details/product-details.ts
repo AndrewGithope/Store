@@ -1,26 +1,42 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Api } from '../../core/services/api';
-import { Product } from '../../shared/models/product';
+import { Component, inject, signal, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { cartStore } from '../../core/store/cart.store';
 
 @Component({
   selector: 'app-product-details',
-  imports: [RouterLink],
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatIconModule],
   templateUrl: './product-details.html',
-  styleUrl: './product-details.css',
+  styleUrl: './product-details.css'
 })
-export class ProductDetails implements OnInit{
+export class ProductDetails implements OnInit {
   private route = inject(ActivatedRoute);
-  private apiService = inject(Api);
+  private router = inject(Router); 
+  readonly cartStore = inject(cartStore);
 
-  product: Product | null = null;
+  product = signal<any>(null);
 
   ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('id');
+    
+    // Имитируем получение товара (или заменяй на реальный ProductService)
+    // Здесь берем из сохраненного списка или запрашиваем API
+    fetch(`https://dummyjson.com/products/${productId}`)
+      .then(res => res.json())
+      .then(data => this.product.set(data))
+      .catch(err => console.error('Failed to load product details', err));
+  }
 
-    this.apiService.getProductById(productId).subscribe(data => {
-      this.product = data;
-      console.log('More information about item', this.product);
-    })
+  addToCart(): void {
+    if (this.product()) {
+      this.cartStore.addToCart(this.product());
+    }
+  }
+
+  goBack(): void {
+    this.router.navigate(['/']);
   }
 }

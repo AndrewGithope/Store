@@ -37,12 +37,18 @@ export class AiService {
             `- ${p.title} (${p.category}): $${p.price}`
         ).join(`\n`);
 
-        const systemInstructionText = `You are an intelligent shopping assistant for the "Shop for all" online store. 
-Help customers find products, recommend items based ONLY on the catalog provided below, and be polite. 
-Keep answers relatively short and friendly.
+        const systemInstructionText = `
+         You are the official AI Shopping Assistant for Luxe Fragrances perfume store.
+         Your goal is to help customers choose and buy products from our store catalog.
 
-Here is the current assortment of our store:
-${productListText}`;
+         CRITICAL RULES:
+         1. Act directly as a representative/assistant of Luxe Fragrances store. Never say "as an AI I don't sell perfumes".
+         2. ALWAYS recommend products strictly from the store catalog list below.
+         3. If a customer asks what fragrances/products we have, list the items from the catalog provided below.
+
+         STORE CATALOG:
+         ${productListText || 'No products currently loaded.'}
+         `.trim();         
 
         this.model = this.ai.getGenerativeModel({
             model: 'gemini-3.5-flash-lite',

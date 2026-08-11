@@ -38,8 +38,13 @@ import { AuthStore } from '../../../core/store/auth.store';
 
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Password</mat-label>
-            <input matInput type="password" formControlName="password" placeholder="Enter your password">
-            <mat-icon matSuffix class="field-icon">key</mat-icon>
+            <input matInput type="password" formControlName="password">
+            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+              Password is required
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+              Password must be at least 8 characters long
+            </mat-error>
           </mat-form-field>
 
           <div *ngIf="authStore.error()" class="error-banner">
@@ -83,7 +88,7 @@ export class AuthDialogComponent {
 
   loginForm = this.fb.group({
     username: ['', Validators.required],
-    password: ['', Validators.required]
+    password: ['', Validators.required, Validators.minLength(8)]
   });
 
   onSubmit(): void {

@@ -2,6 +2,7 @@ import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap, catchError, of } from 'rxjs';
+import { cartStore } from './cart.store';
 
 export interface User {
   id: number;
@@ -78,6 +79,7 @@ export const AuthStore = signalStore(
     logout() {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      localStorage.removeItem('user_session');
       patchState(store, {
         user: null,
         token: null,
