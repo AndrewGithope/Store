@@ -1,94 +1,36 @@
-<div class="landing-page">
 
-
-  <section class="hero-section" style="background-image: url('https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&w=1920&q=80');">
-    <div class="hero-overlay">
-      <div class="hero-text-content">
-        <span class="hero-subtitle">ELEGANCE IN EVERY DROP</span>
-        <h1>FIND YOUR SIGNATURE SCENT</h1>
-        <p>Explore an exclusive collection of luxury perfumes crafted for your unique presence and style.</p>
-        <button mat-raised-button class="hero-btn" (click)="scrollToCatalog()">
-          Explore Collection
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <section id="mission" class="mission-section">
-    <h2>OUR MISSION</h2>
-    <div class="mission-underline"></div>
-    <p>
-      At Luxe Fragrances, we believe that scent is the most intimate form of memory. 
-      Our mission is to bring you iconic, high-grade fragrances that define individuality and sophistication.
-    </p>
-  </section>
-
+<div class="products-grid" *ngIf="filteredProducts().length > 0; else emptyState">
+  <mat-card class="product-card" *ngFor="let product of filteredProducts()">
+    
   
-  <section class="promo-grid-section">
-    <div class="promo-card">
-      <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=600&q=80" alt="Eau De Parfum">
-      <div class="promo-title">EAU DE PARFUM</div>
-    </div>
-    <div class="promo-card">
-      <img src="https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&w=600&q=80" alt="Niche Collection">
-      <div class="promo-title">NICHE COLLECTION</div>
-    </div>
-    <div class="promo-card">
-      <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=600&q=80" alt="Essential Oils">
-      <div class="promo-title">ESSENTIAL OILS</div>
-    </div>
-  </section>
-
- 
-  <section #catalogSection id="catalog" class="catalog-section">
-    <div class="section-header">
-      <h2>EXPLORE FRAGRANCES</h2>
-      <p>Discover our top luxury fragrance selections.</p>
+    <div class="image-wrapper" [routerLink]="['/products', product.id]" style="cursor: pointer;">
+      <img mat-card-image [src]="product.thumbnail" [alt]="product.title">
     </div>
 
-    <div class="controls-bar">
-      <button mat-flat-button color="primary" class="category-btn">
-        <mat-icon>local_florist</mat-icon> Fragrances
+    <mat-card-content class="card-content">
+      <span class="category-tag">fragrances</span>
+    
+      <h3 class="product-title" [routerLink]="['/products', product.id]" style="cursor: pointer;">
+        {{ product.title }}
+      </h3>
+      
+      <p class="product-price">${{ product.price }}</p>
+    </mat-card-content>
+
+    <mat-card-actions class="card-actions">
+
+      <button mat-raised-button color="primary" class="add-btn" (click)="addToCart(product)">
+        <mat-icon>add_shopping_cart</mat-icon> Add to Cart
       </button>
+    </mat-card-actions>
 
-      <mat-form-field appearance="outline" class="search-field">
-        <mat-label>Search fragrances (e.g., Dior, Chanel)...</mat-label>
-        <input 
-          matInput 
-          [ngModel]="searchQuery()" 
-          (ngModelChange)="onSearchChange($event)"
-          placeholder="Type brand or name">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
-    </div>
-
-   
-    <div class="products-grid" *ngIf="filteredProducts().length > 0; else emptyState">
-      <mat-card class="product-card" *ngFor="let product of filteredProducts()">
-        <div class="image-wrapper">
-          <img mat-card-image [src]="product.thumbnail" [alt]="product.title">
-        </div>
-
-        <mat-card-content class="card-content">
-          <span class="category-tag">fragrances</span>
-          <h3 class="product-title">{{ product.title }}</h3>
-          <p class="product-price">${{ product.price }}</p>
-        </mat-card-content>
-
-        <mat-card-actions class="card-actions">
-          <button mat-raised-button color="primary" class="add-btn" (click)="addToCart(product)">
-            <mat-icon>add_shopping_cart</mat-icon> Add to Cart
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-
-    <ng-template #emptyState>
-      <div class="no-results">
-        <mat-icon class="no-results-icon">search_off</mat-icon>
-        <p>No fragrances found for "{{ searchQuery() }}"</p>
-      </div>
-    </ng-template>
-  </section>
-
+  </mat-card>
 </div>
+
+
+<ng-template #emptyState>
+  <div class="no-results">
+    <mat-icon class="no-results-icon">search_off</mat-icon>
+    <p>No fragrances found for "{{ searchQuery() }}"</p>
+  </div>
+</ng-template>

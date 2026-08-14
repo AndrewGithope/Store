@@ -1,6 +1,7 @@
 import { Component, inject, signal, computed, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -23,6 +24,7 @@ import { AiService } from '../../core/services/ai-service';
     FormsModule,
     MatCardModule,
     MatButtonModule,
+    RouterLink,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
