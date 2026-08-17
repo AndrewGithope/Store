@@ -54,17 +54,17 @@ export class ProductDetails implements OnInit {
     const currentProduct = this.product();
     if (!currentProduct) return;
 
-    
-    const isAuthenticated = this.authStore.isAuthenticated();
+    const isAuth = typeof (this.authStore as any).isAuthenticated === 'function' 
+      ? (this.authStore as any).isAuthenticated() 
+      : !!(this.authStore as any).user?.();
 
-    if (!isAuthenticated) {
-      
+    if (!isAuth) {
       const dialogRef = this.dialog.open(AuthDialogComponent, {
         width: '400px'
       });
 
-      dialogRef.afterClosed().subscribe(() => {
-        if (this.authStore.isAuthenticated()) {
+      dialogRef.afterClosed().subscribe((isSuccess: boolean) => {
+        if (isSuccess) {
           this.executeAddToCart(currentProduct);
         }
       });
@@ -83,4 +83,5 @@ export class ProductDetails implements OnInit {
 
     this.cartStore.addToCart(itemToCart);
   }
+
 }
