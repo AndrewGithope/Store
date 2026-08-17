@@ -44,7 +44,6 @@ export class Header {
 
   logout(): void{
     this.authStore.logout();
-    this.cartStore.clearCart();
   }
 
   opencart(): void {

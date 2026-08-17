@@ -77,9 +77,12 @@ export const AuthStore = signalStore(
     },
 
     logout() {
+      const cart = inject(cartStore);
+
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       localStorage.removeItem('user_session');
+      cart.clearCart();
       patchState(store, {
         user: null,
         token: null,
