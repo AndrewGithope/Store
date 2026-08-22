@@ -72,12 +72,12 @@ export class ProductListComponent implements OnInit {
 
   addToCart(product: Product): void {
     if (!this.authStore.isAuthenticated()) {
-      this.dialog.open(AuthDialogComponent, {
-        width: '400px'
-      });
-      return;
-    }
-
-    this.cartStore.addToCart(product);
+    this.dialog.open(AuthDialogComponent, {
+      width: '400px'
+    });
+   }
+   if(this.authStore.isAuthenticated()){
+      this.cartStore.addToCart(product);
+   }
   }
 }

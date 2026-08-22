@@ -32,11 +32,14 @@ const initialState: AuthState = {
 export const AuthStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
-  withMethods((store, http = inject(HttpClient)) => ({
+  withMethods((
+    store, 
+    http = inject(HttpClient), 
+    cart = inject(cartStore) // Inject cartStore here in injection context
+  ) => ({
     login(credentials: { username: string; password?: string }) {
       patchState(store, { isLoading: true, error: null });
 
-      
       const dummyPayload = {
         username: 'emilys',
         password: 'emilyspass'
@@ -44,7 +47,6 @@ export const AuthStore = signalStore(
 
       http.post<any>('https://dummyjson.com/auth/login', dummyPayload).pipe(
         tap((response) => {
-        
           const user: User = {
             id: response.id,
             username: credentials.username, 
@@ -54,7 +56,6 @@ export const AuthStore = signalStore(
             token: response.accessToken || response.token 
           };
 
-          // Сохраняем сессию
           localStorage.setItem('token', user.token!);
           localStorage.setItem('user', JSON.stringify(user));
 
@@ -77,12 +78,12 @@ export const AuthStore = signalStore(
     },
 
     logout() {
-      const cart = inject(cartStore);
-
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       localStorage.removeItem('user_session');
+
       cart.clearCart();
+
       patchState(store, {
         user: null,
         token: null,
